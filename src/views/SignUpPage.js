@@ -31,7 +31,7 @@ const SignUpPage = ({ history }) => {
           config
         );
 
-        localStorage.setItem("authToken", data.token);
+        localStorage.setItem('jwtreservespot', data.token);
 
         history.push("/calendar");
       } catch (error) {
@@ -112,7 +112,7 @@ const SignUpPage = ({ history }) => {
                   value={confirmPassword}
                   type="password"
                   placeholder="Confirm password"
-                  id="password"
+                  id="confirmPassword"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                 />

@@ -1,41 +1,26 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-const LoginPage = ({ history }) => {
-  const apiUrl = process.env.REACT_APP_API_URL;
+const LoginPage = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
+  const {error} = useContext(AuthContext)
+  const { loginUser } = useContext(AuthContext);
   useEffect(() => {
-    if (localStorage.getItem("authToken")) {
-      history.push("/calendar");
+    if(localStorage.getItem('jwtreservespot')){
+      history.push('/calendar')
     }
-  }, [history]);
+  }, [history])
+
   const loginHandler = async (e) => {
     e.preventDefault();
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
-
     try {
-      const { data } = await axios.post(
-        `${apiUrl}/auth/login`,
-        { email, password },
-        config
-      );
-
-      localStorage.setItem("authToken", data.token);
-
+      loginUser({ email, password });
       history.push("/calendar");
     } catch (error) {
-      setError(error.response.data.error);
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+      console.log(error)
     }
   };
 
@@ -52,16 +37,18 @@ const LoginPage = ({ history }) => {
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-          {error ? <span style={{color: 'rgb(209, 2, 20)'}}>{error}</span> : <span>Please enter your credentials</span>}
+            {error ? (
+              <span style={{ color: "rgb(209, 2, 20)" }}>{error}</span>
+            ) : (
+              <span>Please enter your credentials</span>
+            )}
           </p>
         </div>
         <form onSubmit={loginHandler} className="mt-8 space-y-6">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label className="sr-only">
-                Email address
-              </label>
+              <label className="sr-only">Email address</label>
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
@@ -73,9 +60,7 @@ const LoginPage = ({ history }) => {
               />
             </div>
             <div>
-              <label className="sr-only">
-                Password
-              </label>
+              <label className="sr-only">Password</label>
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 name="password"
@@ -107,7 +92,8 @@ const LoginPage = ({ history }) => {
             </div>
 
             <div className="text-sm">
-              <Link to="/signup"
+              <Link
+                to="/signup"
                 className="font-medium text-yellow-600 hover:text-yellow-500"
               >
                 Doesn't have an account?
@@ -130,5 +116,3 @@ const LoginPage = ({ history }) => {
 };
 
 export default LoginPage;
-
-

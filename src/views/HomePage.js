@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { AuthContext } from "../context/AuthContext";
 
 const HomePage = () => {
+  const {loggedIn} = useContext(AuthContext);
+
+  console.log(loggedIn)
+
   return (
     <div >
       <div>
@@ -38,14 +43,14 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                {loggedIn ? <p>Welcome</p> : <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                 <Link to="/signup" className="font-medium hover:text-yellow-500">
                     Sign up
                   </Link>
                   <Link to="login" className="font-medium text-yellow-600 hover:text-yellow-500">
                     Log in
                   </Link>
-                </div>
+                </div> }
               </nav>
             </div>
 
@@ -107,7 +112,7 @@ const HomePage = () => {
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <Link
-                    to="#"
+                    to="/calendar"
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-700 md:py-4 md:text-lg md:px-10"
                   >
                     Get started
