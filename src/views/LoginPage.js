@@ -13,7 +13,6 @@ const LoginPage = ({ history }) => {
       history.push("/calendar");
     }
   }, [history]);
-
   const loginHandler = async (e) => {
     e.preventDefault();
     const config = {
@@ -39,6 +38,7 @@ const LoginPage = ({ history }) => {
       }, 5000);
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -59,7 +59,7 @@ const LoginPage = ({ history }) => {
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="email-address" className="sr-only">
+              <label className="sr-only">
                 Email address
               </label>
               <input
@@ -73,7 +73,7 @@ const LoginPage = ({ history }) => {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">
+              <label className="sr-only">
                 Password
               </label>
               <input
