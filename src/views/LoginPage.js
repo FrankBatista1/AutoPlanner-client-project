@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const {error} = useContext(AuthContext)
   const { loginUser } = useContext(AuthContext);
+
   useEffect(() => {
     if(localStorage.getItem('jwtreservespot')){
       history.push('/calendar')

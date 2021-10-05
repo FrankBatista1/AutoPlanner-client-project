@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useState } from "react";
 
 export const baseURL = process.env.REACT_APP_API_URL;
 

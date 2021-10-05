@@ -6,11 +6,23 @@ export const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
-
+  const [user, setUser] = useState([])
 
   useEffect(() => {
     checkLogged();
   }, []);
+
+
+const fetchUserData = async () => {
+  const {uid} = await JSON.parse(localStorage.getItem('uid'))
+  
+  try {
+    const { data } = await apiHelper.get(`/users/user/${uid}`);
+    setUser(data)
+  } catch (error) {
+    console.log(error)
+  }
+};
 
   const loginUser = async (user) => {
     try {
@@ -51,6 +63,8 @@ const AuthProvider = ({ children }) => {
       value={{
         loggedIn,
         error,
+        user,
+        fetchUserData,
         loginUser,
         logOutUser,
       }}

@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
-import { Fragment, useContext } from 'react'
+import { Fragment, useContext, useEffect } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { AuthContext } from "../context/AuthContext";
 
 const HomePage = () => {
-  const {loggedIn} = useContext(AuthContext);
-
-  console.log(loggedIn)
-
+  const {loggedIn, user, fetchUserData} = useContext(AuthContext);
+  useEffect(() => {
+    if(loggedIn){
+      fetchUserData()
+    }  
+  }, [fetchUserData])
+  
   return (
     <div >
       <div>
@@ -43,7 +46,7 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-                {loggedIn ? <p>Welcome</p> : <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                {loggedIn ? <p>Welcome {user.name} </p> : <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                 <Link to="/signup" className="font-medium hover:text-yellow-500">
                     Sign up
                   </Link>
