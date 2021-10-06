@@ -15,12 +15,13 @@ const AuthProvider = ({ children }) => {
 
 const fetchUserData = async () => {
   const {uid} = await JSON.parse(localStorage.getItem('uid'))
-  
   try {
     const { data } = await apiHelper.get(`/users/user/${uid}`);
     setUser(data)
   } catch (error) {
-    console.log(error)
+    localStorage.removeItem("jwtreservespot");
+    localStorage.removeItem("uid");
+    setLoggedIn(false);
   }
 };
 
