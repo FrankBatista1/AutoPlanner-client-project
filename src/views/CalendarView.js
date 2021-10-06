@@ -5,6 +5,7 @@ import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import '../style/HomePage.css'
 
 const CalendarView = () => {
   const { logOutUser, fetchUserData, user } = useContext(AuthContext);
@@ -23,7 +24,7 @@ const CalendarView = () => {
   ]
   return (
     <div>
-      <p>Welcome {user.name}</p>
+      <p>{user.name}'s calendar</p>
       <div  className="demo-app">
         <div className="demo-app-main">
           <FullCalendar 

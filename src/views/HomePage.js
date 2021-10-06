@@ -46,7 +46,7 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-                {loggedIn ? <p>Welcome {user.name} </p> : <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                {loggedIn ? <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8"><p className="font-medium text-yellow-500">Welcome </p> <p>{user.name} </p></div>: <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                 <Link to="/signup" className="font-medium hover:text-yellow-500">
                     Sign up
                   </Link>
@@ -79,25 +79,24 @@ const HomePage = () => {
                         alt=""
                       />
                     </div>
-                    <div className="-mr-2">
+                   <div className="-mr-2">
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500">
                         <span className="sr-only">Close main menu</span>
                         <XIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
                     </div>
                   </div>
-                  <Link
+                   {loggedIn ? <><p className="font-medium text-yellow-500">Welcome </p><p>{user.name} </p></> : <><Link
                     to="/login"
                     className="block w-full px-5 py-3 text-center font-medium text-yellow-600 bg-gray-50 hover:bg-gray-100"
                   >
                     Log in
-                  </Link>
-                  <Link
+                  </Link><Link
                     to="/signup"
                     className="block w-full px-5 py-3 text-center font-medium bg-gray-50 hover:bg-gray-100"
                   >
-                    Sign up
-                  </Link>
+                      Sign up
+                    </Link></>}
                 </div>
               </Popover.Panel>
             </Transition>

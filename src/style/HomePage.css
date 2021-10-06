@@ -1,3 +1,21 @@
-.navbar.transparent.navbar-inverse .navbar-inner {
-  background: rgba(0,0,0,0.4);
+.fc .fc-button-primary{
+  background-color: #F59E0B;
+  border-color: #d48d13;
+  color: #fafafa;
+}
+.fc .fc-button-primary:hover{
+  background-color: #c78006;
+  border-color: #d48d13;
+  color: #fafafa;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active{
+  background-color: #a87027;
+  border-color: #d48d13;
+}
+.fc .fc-button-primary:disabled {
+  background-color: #a16f2d;
+  border-color: #1b1207;
+}
+.fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #c58531;
 }
