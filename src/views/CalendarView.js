@@ -8,20 +8,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 import '../style/HomePage.css'
 
 const CalendarView = () => {
-  const { logOutUser, fetchUserData, user } = useContext(AuthContext);
-  let todayStr = new Date().toISOString().replace(/T.*$/, '')
+  const { logOutUser, fetchUserData, user , events, fetchEventsData} = useContext(AuthContext);
   useEffect(() => {
     fetchUserData();
-    
+    fetchEventsData();
   }, []);
 
-  const INITIAL_EVENTS = [
-    {
-      id: 3,
-      title: 'All-day event',
-      start: todayStr
-    }
-  ]
   return (
     <div>
       <p>{user.name}'s calendar</p>
@@ -34,6 +26,7 @@ const CalendarView = () => {
               center: "title",
               right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
+            progressiveEventRendering={true}
             height={720}
             initialView="dayGridMonth"
             editable={true}
@@ -42,7 +35,7 @@ const CalendarView = () => {
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            events={events}
             select={""}
           // custom render function
             eventClick={""}

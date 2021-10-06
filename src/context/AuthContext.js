@@ -7,6 +7,7 @@ const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
   const [user, setUser] = useState([])
+  const [events, setEvents] = useState([])
 
   useEffect(() => {
     checkLogged();
@@ -24,6 +25,15 @@ const fetchUserData = async () => {
     setLoggedIn(false);
   }
 };
+const fetchEventsData = async () => {
+  const {uid} = await JSON.parse(localStorage.getItem('uid'))
+  try{
+    const {data} = await apiHelper.get(`/events/event/user/${uid}`)
+    setEvents(data)
+  }catch(error){
+    console.log(error)
+  }
+}
 
   const loginUser = async (user) => {
     try {
@@ -65,6 +75,8 @@ const fetchUserData = async () => {
         loggedIn,
         error,
         user,
+        fetchEventsData,
+        events,
         fetchUserData,
         loginUser,
         logOutUser,
