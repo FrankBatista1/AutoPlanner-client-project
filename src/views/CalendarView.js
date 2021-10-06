@@ -1,5 +1,4 @@
 import { useContext, useEffect} from "react";
-import { useHistory } from 'react-router-dom'
 import { AuthContext } from "../context/AuthContext";
 import React from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
@@ -9,10 +8,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 const CalendarView = () => {
   const { logOutUser, fetchUserData, user } = useContext(AuthContext);
-
   let todayStr = new Date().toISOString().replace(/T.*$/, '')
-
-
   useEffect(() => {
     fetchUserData();
     
@@ -28,17 +24,19 @@ const CalendarView = () => {
   return (
     <div>
       <p>Welcome {user.name}</p>
-      <div className="demo-app">
+      <div  className="demo-app">
         <div className="demo-app-main">
-          <FullCalendar
+          <FullCalendar 
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
               left: "prev,next today",
               center: "title",
               right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
+            height={720}
             initialView="dayGridMonth"
             editable={true}
+            eventBorderColor={"#d48d13"}
             eventBackgroundColor={"#F59E0B"}
             selectable={true}
             selectMirror={true}
