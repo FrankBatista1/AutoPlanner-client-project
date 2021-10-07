@@ -78,17 +78,15 @@ const LoginPage = () => {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
-              />
               <label
                 htmlFor="remember-me"
                 className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
+              ><Link
+                  to="/forgotpassword"
+                  className="font-medium text-gray-900 hover:text-yellow-500"
+                >
+                  Forgot password?
+                </Link>
               </label>
             </div>
 

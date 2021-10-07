@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import apiHelper from "../helpers/apiHelper";
 
@@ -6,45 +7,46 @@ export const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
-  const [user, setUser] = useState([])
-  const [events, setEvents] = useState([])
+  const [user, setUser] = useState([]);
+  const [events, setEvents] = useState([]);
+ 
 
   useEffect(() => {
     checkLogged();
   }, []);
 
-const updateUserEvetns = async (eventid, bodyToUpdate) => {
-  try{
-  apiHelper.put(`/events/event/${eventid}`, bodyToUpdate)
-  fetchEventsData() 
-  }catch(error){
-    console.log(error);
-  }
+  const updateUserEvetns = async (eventid, bodyToUpdate) => {
+    try {
+      apiHelper.put(`/events/event/${eventid}`, bodyToUpdate);
+      fetchEventsData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-}
+  const fetchUserData = async () => {
+    const { uid } = await JSON.parse(localStorage.getItem("uid"));
+    try {
+      const { data } = await apiHelper.get(`/users/user/${uid}`);
+      setUser(data);
+    } catch (error) {
+      localStorage.removeItem("jwtreservespot");
+      localStorage.removeItem("uid");
+      setLoggedIn(false);
+    }
+  };
 
 
-const fetchUserData = async () => {
-  const {uid} = await JSON.parse(localStorage.getItem('uid'))
-  try {
-    const { data } = await apiHelper.get(`/users/user/${uid}`);
-    setUser(data)
-  } catch (error) {
-    localStorage.removeItem("jwtreservespot");
-    localStorage.removeItem("uid");
-    setLoggedIn(false);
-  }
-};
 
-const fetchEventsData = async () => {
-  const {uid} = await JSON.parse(localStorage.getItem('uid'))
-  try{
-    const {data} = await apiHelper.get(`/events/event/user/${uid}`)
-    setEvents(data)
-  }catch(error){
-    console.log(error)
-  }
-}
+  const fetchEventsData = async () => {
+    const { uid } = await JSON.parse(localStorage.getItem("uid"));
+    try {
+      const { data } = await apiHelper.get(`/events/event/user/${uid}`);
+      setEvents(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const loginUser = async (user) => {
     try {
@@ -54,10 +56,7 @@ const fetchEventsData = async () => {
         "jwtreservespot",
         JSON.stringify({ token: data.token })
       );
-      localStorage.setItem(
-        "uid",
-        JSON.stringify({ uid: data.uid })
-      );
+      localStorage.setItem("uid", JSON.stringify({ uid: data.uid }));
       setLoggedIn(true);
     } catch (error) {
       setError("Please check credentials");
@@ -67,10 +66,8 @@ const fetchEventsData = async () => {
     }
   };
 
-
-
   const checkLogged = () => {
-    const tokenValue = localStorage.getItem('jwtreservespot');
+    const tokenValue = localStorage.getItem("jwtreservespot");
     return tokenValue ? setLoggedIn(true) : setLoggedIn(false);
   };
 

@@ -1,16 +1,25 @@
-import { useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import React from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import '../style/HomePage.css'
-import momentTimezonePlugin from '@fullcalendar/moment-timezone'
+import "../style/HomePage.css";
+import momentTimezonePlugin from "@fullcalendar/moment-timezone";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const CalendarView = () => {
-  const [date, setDate] = useState("")
-  const { logOutUser, fetchUserData, user , events, fetchEventsData, updateUserEvetns} = useContext(AuthContext);
+  const [date, setDate] = useState("");
+  const {
+    logOutUser,
+    fetchUserData,
+    user,
+    events,
+    fetchEventsData,
+    updateUserEvetns,
+  } = useContext(AuthContext);
   useEffect(() => {
     fetchUserData();
     fetchEventsData();
@@ -19,20 +28,39 @@ const CalendarView = () => {
   // event.event._def.extendedProps._id
   // event.event._instance.range.end
 
-  
   return (
     <div>
-      <p>{user.name}'s calendar</p>
-      <div  className="demo-app">
-        <div className="demo-app-main">
-          <FullCalendar 
-            plugins={[momentTimezonePlugin, dayGridPlugin, timeGridPlugin, interactionPlugin]}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <button
+          style={{ backgroundColor: "#F59E0B", borderColor: "#d48d13" }}
+          className=" py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+          onClick={logOutUser}
+        >
+          Log out
+        </button>
+        <Link
+          to="/newexercise"
+          style={{ backgroundColor: "#F59E0B", borderColor: "#d48d13" }}
+          className="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+        >
+          New exercise
+        </Link>
+      </div>
+      <div>
+        <div>
+          <FullCalendar
+            plugins={[
+              momentTimezonePlugin,
+              dayGridPlugin,
+              timeGridPlugin,
+              interactionPlugin,
+            ]}
             headerToolbar={{
               left: "prev,next today",
               center: "title",
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+              right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
-            timeZone={'UTC'}
+            timeZone={"UTC"}
             height={720}
             initialView="dayGridMonth"
             editable={true}
@@ -41,18 +69,21 @@ const CalendarView = () => {
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
-            events={events} // alternatively, use the `events` setting to fetch from a feed
+            events={events}
             select={""}
-          // custom render function
             eventClick={""}
-            eventsSet={""} 
+            eventsSet={""}
             allDayMaintainDuration={true}
-            eventChange={(event) => updateUserEvetns(event.event._def.extendedProps._id, {start : event.event._instance.range.start})}
-           
+            //extracts the new data from the event and updates it in the database
+            eventChange={(event) =>
+              updateUserEvetns(event.event._def.extendedProps._id, {
+                start: event.event._instance.range.start,
+              })
+            }
           />
         </div>
+        <h2>{user.name}'s planner</h2>
       </div>
-      <button onClick={logOutUser}>Log out</button>
     </div>
   );
 };

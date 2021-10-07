@@ -65,7 +65,6 @@ const SignUpPage = ({ history }) => {
             </p>
           </div>
           <form onSubmit={signUpHandler} className="mt-8 space-y-6">
-            <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label className="sr-only">Name</label>
@@ -121,17 +120,15 @@ const SignUpPage = ({ history }) => {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
-                />
                 <label
-                  htmlFor="remember-me"
                   className="ml-2 block text-sm text-gray-900"
                 >
-                  Remember me
+                  <Link
+                  to="/forgotpassword"
+                  className="font-medium text-gray-900 hover:text-yellow-500"
+                >
+                  Forgot password?
+                </Link>
                 </label>
               </div>
 
@@ -140,7 +137,7 @@ const SignUpPage = ({ history }) => {
                   to="/login"
                   className="font-medium text-yellow-600 hover:text-yellow-500"
                 >
-                  Doesn't have an account?
+                  Already have an account?
                 </Link>
               </div>
             </div>
