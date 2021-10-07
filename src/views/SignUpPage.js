@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { baseURL } from "../helpers/apiHelper";
 
 const SignUpPage = ({ history }) => {
-  const apiUrl = process.env.REACT_APP_API_URL;
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ const SignUpPage = ({ history }) => {
 
       try {
         const { data } = await axios.post(
-          `${apiUrl}/auth/signup`,
+          `${baseURL}/auth/signup`,
           { name, email, password },
           config
         );

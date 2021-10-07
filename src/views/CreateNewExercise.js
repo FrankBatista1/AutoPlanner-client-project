@@ -1,4 +1,6 @@
 import React from "react";
+import {baseURL} from '../helpers/apiHelper'
+
 
 const center = {
   position: "absolute",
@@ -10,7 +12,7 @@ const center = {
 const CreateNewExercise = () => {
   return (
     <div style={center} className="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST">
+      <form onSubmit="">
         <div className="shadow overflow-hidden sm:rounded-md">
           <div className="px-4 py-5 bg-white sm:p-6">
             <img
@@ -45,9 +47,13 @@ const CreateNewExercise = () => {
                 <label className="block text-sm font-medium text-gray-700">
                   Exercise Type
                 </label>
-                <select
+                <select defaultValue={"Full body workout"}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                />
+                >
+                <option value={"red"}>Full body workout</option>
+                <option value={"blue"}>Lower body workout</option>
+                <option value={"green"}>Upper body workout</option>
+                </select>
               </div>
               <div className="col-span-10">
                 <label className="block text-sm font-medium text-gray-700">
