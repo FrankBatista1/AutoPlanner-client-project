@@ -13,6 +13,16 @@ const AuthProvider = ({ children }) => {
     checkLogged();
   }, []);
 
+const updateUserEvetns = async (eventid, bodyToUpdate) => {
+  try{
+  apiHelper.put(`/events/event/${eventid}`, bodyToUpdate)
+  fetchEventsData() 
+  }catch(error){
+    console.log(error);
+  }
+
+}
+
 
 const fetchUserData = async () => {
   const {uid} = await JSON.parse(localStorage.getItem('uid'))
@@ -25,6 +35,7 @@ const fetchUserData = async () => {
     setLoggedIn(false);
   }
 };
+
 const fetchEventsData = async () => {
   const {uid} = await JSON.parse(localStorage.getItem('uid'))
   try{
@@ -76,6 +87,7 @@ const fetchEventsData = async () => {
         error,
         user,
         fetchEventsData,
+        updateUserEvetns,
         events,
         fetchUserData,
         loginUser,
