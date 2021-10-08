@@ -86,6 +86,7 @@ const AuthProvider = ({ children }) => {
         fetchEventsData,
         updateUserEvetns,
         events,
+        setEvents,
         fetchUserData,
         loginUser,
         logOutUser,

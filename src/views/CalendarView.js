@@ -9,6 +9,8 @@ import "../style/HomePage.css";
 import momentTimezonePlugin from "@fullcalendar/moment-timezone";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { baseURL } from "../helpers/apiHelper";
+import axios from "axios";
 
 const CalendarView = () => {
   const [date, setDate] = useState("");
@@ -17,6 +19,7 @@ const CalendarView = () => {
     fetchUserData,
     user,
     events,
+    setEvents,
     fetchEventsData,
     updateUserEvetns,
   } = useContext(AuthContext);
@@ -24,10 +27,28 @@ const CalendarView = () => {
     fetchUserData();
     fetchEventsData();
   }, []);
-  //(event) => updateUserEvetns(event.event._def.extendedProps._id, {start : e.event._instance.range.end.toDateString()})
-  // event.event._def.extendedProps._id
-  // event.event._instance.range.end
-
+  const handleClick = async (object) => {
+    const result = await Swal.fire({
+      title: object.event._def.title,
+      text: object.event._def.url,
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#F59E0B",
+      denyButtonColor: "#c41019",
+      confirmButtonText: "Open exercise link",
+      denyButtonText: `Delete exercise`,
+    })
+    if (result.isConfirmed){
+      window.open(object.event.url)
+    } 
+    if(result.isDenied){
+      const id = object.event._def.extendedProps._id
+      const filtered = events
+          .filter((event) => event._id !== id)
+      await axios.delete(`${baseURL}/events/event/${id}`)
+      setEvents(filtered)
+    }
+  };
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -58,7 +79,7 @@ const CalendarView = () => {
             headerToolbar={{
               left: "prev,next today",
               center: "title",
-              right: "dayGridMonth",
+              right: "",
             }}
             timeZone={"UTC"}
             height={720}
@@ -70,9 +91,12 @@ const CalendarView = () => {
             selectMirror={true}
             dayMaxEvents={true}
             events={events}
-            select={""}
+            eventClick={function (e) {
+              e.jsEvent.preventDefault();
+              handleClick(e)
+            }}
             defaultAllDay={true}
-            eventMouseEnter={(e, el) => console.log(e.event._def.url)}
+            eventMouseEnter={""}
             //extracts the new data from the event and updates it in the database
             eventChange={(event) =>
               updateUserEvetns(event.event._def.extendedProps._id, {
