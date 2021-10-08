@@ -6,14 +6,14 @@ const LoginPage = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {error} = useContext(AuthContext)
+  const { error } = useContext(AuthContext);
   const { loginUser } = useContext(AuthContext);
 
   useEffect(() => {
-    if(localStorage.getItem('jwtreservespot')){
-      history.push('/calendar')
+    if (localStorage.getItem("jwtreservespot")) {
+      history.push("/calendar");
     }
-  }, [history])
+  }, [history]);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const LoginPage = () => {
       loginUser({ email, password });
       history.push("/calendar");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -29,11 +29,13 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://res.cloudinary.com/duscflsvf/image/upload/v1633316619/International_Marathon_Running_Shoe_Logo_2_xznkd8.png"
-            alt="Workflow"
-          />
+          <Link to="/">
+            <img
+              className="mx-auto h-12 w-auto"
+              src="https://res.cloudinary.com/duscflsvf/image/upload/v1633316619/International_Marathon_Running_Shoe_Logo_2_xznkd8.png"
+              alt="Workflow"
+            />
+          </Link>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
@@ -81,7 +83,8 @@ const LoginPage = () => {
               <label
                 htmlFor="remember-me"
                 className="ml-2 block text-sm text-gray-900"
-              ><Link
+              >
+                <Link
                   to="/forgotpassword"
                   className="font-medium text-gray-900 hover:text-yellow-500"
                 >

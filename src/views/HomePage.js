@@ -86,7 +86,7 @@ const HomePage = () => {
                       </Popover.Button>
                     </div>
                   </div>
-                   {loggedIn ? <><p className="font-medium text-yellow-500">Welcome </p><p>{user.name} </p></> : <><Link
+                   {loggedIn ? <><p className="font-large text-yellow-500">Welcome </p><p>{user.name} </p></> : <><Link
                     to="/login"
                     className="block w-full px-5 py-3 text-center font-medium text-yellow-600 bg-gray-50 hover:bg-gray-100"
                   >
@@ -108,25 +108,26 @@ const HomePage = () => {
                 <span className="block xl:inline">Be your own</span><br/>
                 <span className="block text-yellow-500 xl:inline">personal trainer</span><br/>
               </h1>
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget lacinia quam. Mauris nec orci metus. Aliquam erat volutpat. Quisque ac hendrerit felis. Donec sodales non est et posuere. Pellentesque eleifend consectetur libero id lobortis. Nulla mollis ac ex et placerat. Mauris scelerisque porta ligula ut ultrices. Donec lobortis ac enim vitae ultricies. Ut pharetra libero sed erat convallis, et porttitor turpis ornare.
+              <br/>
+              <p className="mt-3 text-xl text-gray-500 sm:mt-5 sm:text-xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-2xl lg:mx-0">
+             Welcome to AutoPlanner the page where you <br/> can plan ahead your exercises, try creating a planner <br/>with your custom exercises, link them <br/>with your youtube videos, images, guides and more!
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
-                  <Link
+                  {user.name ? <Link
                     to="/calendar"
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-700 md:py-4 md:text-lg md:px-10"
                   >
+                    Open your planner
+                  </Link> :
+                  <Link
+                    to="/signup"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-700 md:py-4 md:text-lg md:px-10"
+                  >
                     Get started
-                  </Link>
+                  </Link>}
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <Link
-                    to="#"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 md:py-4 md:text-lg md:px-10"
-                  >
-                    About us
-                  </Link>
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import apiHelper from "../helpers/apiHelper";
 
@@ -9,7 +8,6 @@ const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [user, setUser] = useState([]);
   const [events, setEvents] = useState([]);
- 
 
   useEffect(() => {
     checkLogged();
@@ -35,8 +33,6 @@ const AuthProvider = ({ children }) => {
       setLoggedIn(false);
     }
   };
-
-
 
   const fetchEventsData = async () => {
     const { uid } = await JSON.parse(localStorage.getItem("uid"));
