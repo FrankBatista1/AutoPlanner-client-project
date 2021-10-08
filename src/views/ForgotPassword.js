@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { baseURL } from "../helpers/apiHelper";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [error, setError] = useState("");
