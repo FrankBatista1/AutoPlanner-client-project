@@ -69,7 +69,6 @@ const CalendarView = () => {
               center: "",
               right: "title",
             }}
-            timeZone={"UTC"}
             height={"40em"}
             contentHeight={"40em"}
             initialView="dayGridMonth"
