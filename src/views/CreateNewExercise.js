@@ -1,32 +1,13 @@
 import { baseURL } from "../helpers/apiHelper";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
-// async function handleSave() {
-//   const token = localStorage.getItem('jwtreservespot');
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `${token}`,
-//       Accept: "application/json"
-//     }
-//   }
 
-//   const val = await instanceRef.current.save()
-//   if(val.blocks[0]){
-//       await axios.post(`${baseURL}/fields/field`, val, config).then( Swal.fire({
-//       icon: 'success',
-//       title: 'Added',
-//       text: 'Your exercise has been saved',
-//       confirmButtonColor: "#878787",
-//     }))
-//   }
-// }
-
-const CreateNewExercise = () => {
+const CreateNewExercise = ({history}) => {
   const [event, setEvent] = useState({
     title: "",
-    color: "red",
+    color: "#F59E0B",
     start: "",
     url: "",
   });
@@ -58,13 +39,21 @@ const CreateNewExercise = () => {
       },
     };
     try {
-      await axios.post(`${baseURL}/events/event/user/${uid}`, event, config);
+      await axios.post(`${baseURL}/events/event/user/${uid}`, event, config)
+      history.push("/calendar")
+      await Swal.fire({
+        icon: 'success',
+        title: 'Your exercise has been saved',
+        showConfirmButton: false,
+        timer: 1500,
+        iconColor: "#F59E0B"
+      })
       setEvent({
         title: "",
         start: "",
         color: "",
         url: "",
-      });
+      }); 
     } catch (error) {
       console.log(error)
     }
@@ -108,14 +97,14 @@ const CreateNewExercise = () => {
                   Exercise Type
                 </label>
                 <select
-                  defaultValue={"Full body workout"}
+                  defaultValue={"#F59E0B"}
                   name="color"
                   onChange={handleChange}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                 >
-                  <option value={"red"}>Full body workout(red)</option>
-                  <option value={"blue"}>Lower body workout(blue)</option>
-                  <option value={"green"}>Upper body workout(green)</option>
+                  <option value={"#F59E0B"}>Full body workout(orange)</option>
+                  <option value={"#c41019"}>Lower body workout(red)</option>
+                  <option value={"#103dc4"}>Upper body workout(blue)</option>
                 </select>
               </div>
               <div className="col-span-10">

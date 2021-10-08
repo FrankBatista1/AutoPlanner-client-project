@@ -58,7 +58,7 @@ const CalendarView = () => {
             headerToolbar={{
               left: "prev,next today",
               center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay",
+              right: "dayGridMonth",
             }}
             timeZone={"UTC"}
             height={720}
@@ -71,9 +71,8 @@ const CalendarView = () => {
             dayMaxEvents={true}
             events={events}
             select={""}
-            eventClick={""}
-            eventsSet={""}
-            allDayMaintainDuration={true}
+            defaultAllDay={true}
+            eventMouseEnter={(e, el) => console.log(e.event._def.url)}
             //extracts the new data from the event and updates it in the database
             eventChange={(event) =>
               updateUserEvetns(event.event._def.extendedProps._id, {
