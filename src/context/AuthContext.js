@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
 
   const updateUserEvetns = async (eventid, bodyToUpdate) => {
     try {
-      apiHelper.put(`/events/event/${eventid}`, bodyToUpdate);
+      await apiHelper.put(`/events/event/${eventid}`, bodyToUpdate);
       fetchEventsData();
     } catch (error) {
       console.log(error);
