@@ -44,7 +44,7 @@ const CalendarView = () => {
     }
     if (result.isDenied) {
       const id = object.event._def.extendedProps._id;
-      const filtered = events.filter((event) => event._id !== id);
+      const filtered = await events.filter((event) => event._id !== id);
       await axios.delete(`${baseURL}/events/event/${id}`);
       setEvents(filtered);
     }
