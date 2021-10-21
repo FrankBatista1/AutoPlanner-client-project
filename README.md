@@ -12,6 +12,11 @@
 ## What is AutoPlanner
 Autoplanner is a web app that helps people to organize their weekly/monthly workout routines giving them the ability to add links to the proper instructions for the exercises. 
 
+![MenuPreview](https://res.cloudinary.com/duscflsvf/image/upload/v1634791794/Screen_Shot_2021-10-21_at_12.46.43_AM_dttnju.png)
+
+![CalendarPreview](https://res.cloudinary.com/duscflsvf/image/upload/v1634790968/Screen_Shot_2021-10-21_at_12.33.04_AM_baxyfx.png)
+
+
 
 
 
